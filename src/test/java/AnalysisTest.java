@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
-public class AnalysisTests {
+public class AnalysisTest {
     private static ArrayList<String> trans_list;
     private static int[] states_array;
 

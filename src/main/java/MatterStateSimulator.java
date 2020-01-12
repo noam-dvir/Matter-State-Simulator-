@@ -2,7 +2,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MatterStateSimulator {
+
+    public static int runsCounter =1;
+
     public static void main(String[] args) {
+
+        //Arrays.stream(args).forEach(System.out::println);
+
         RunSimulation("L,G,G","Co");
         RunSimulation("L,L","");
         RunSimulation("G","Co");
@@ -17,16 +23,25 @@ public class MatterStateSimulator {
      * output: print a comma separated string with number of objects with a given state
      *         E.g. “G:0,S:2,L:0,P:0,X:1”
      */
-    private static void RunSimulation(String states, String transitions) {
-        String[] statesArray = states.split(",");
+    static void RunSimulation(String states, String transitions) {
+        //String[] statesArray = states.split(",");
         List<String> transList = Arrays.asList(transitions.split(","));
+        State[] inputStates = getInputStates(states);
         int[] resStates = new int[5]; //[G,S,L,P,X] - # of objects
+        /**
         for (String state : statesArray){
             AnalyzeState(state, transList, resStates);
+        }
+         **/
+        for (State state1 : inputStates){
+            if (null != state1){
+                state1.analyse(transList, resStates);
+            }
         }
 
         String resString=getResultString(resStates);
         System.out.println(resString);
+
 
     }
 
@@ -108,10 +123,17 @@ public class MatterStateSimulator {
         }
     }
 
-    private static void XAnalysis(List<String> transList, int[] resStates) {
-        //NEED TO ADD IMPLEMENTATION FOR THE RULE:
+    static void XAnalysis(List<String> transList, int[] resStates) {
         //"One time in a million the planet’s God shows his alien power and
         //turns X matter into Solid, which is impossible for humankind."
+        if (runsCounter==1000000){
+            resStates[1]++;
+            runsCounter=0;
+        }
+        else{
+            resStates[4]++;
+        }
+        runsCounter++;
     }
 
     private static String getResultString(int[] resStates) {
@@ -121,4 +143,23 @@ public class MatterStateSimulator {
              +",P:"+String.valueOf(resStates[3])
              +",X:"+String.valueOf(resStates[4]);
     }
+
+    private static State[] getInputStates(String states) {
+        StateFactory stateFactory = new StateFactory();
+        String[] statesArray = states.split(",");
+        State[] res = new State[statesArray.length];
+        for (int i=0; i<statesArray.length; i++){
+            res[i] = stateFactory.getState(statesArray[i]);
+        }
+        return res;
+    }
+
+    public static int getRunsCounter() {
+        return runsCounter;
+    }
+
+    public static void setRunsCounter(int runsCounter) {
+        MatterStateSimulator.runsCounter = runsCounter;
+    }
+
 }
