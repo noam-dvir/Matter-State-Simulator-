@@ -3,17 +3,18 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
 public class AnalysisTest {
     private static ArrayList<String> trans_list;
     private static int[] states_array;
+    private static StateFactory stateFactory;
 
     @BeforeClass
     public static void initMatterStates() {
         trans_list = new ArrayList<>();
+        stateFactory = new StateFactory();
     }
 
     @Before
@@ -26,40 +27,44 @@ public class AnalysisTest {
 
     @Test
     public void testGasAnalysis() {
+        State gasMatter = stateFactory.getState("G");
         trans_list.add("Ht");
-        MatterStateSimulator.GasAnalysis(trans_list, states_array);
+        gasMatter.analyse(trans_list, states_array);
         assertEquals(1, states_array[1]);
 
         trans_list.add("Co");
-        MatterStateSimulator.GasAnalysis(trans_list, states_array);
+        gasMatter.analyse(trans_list, states_array);
         assertEquals(1, states_array[4]);
     }
 
     @Test
     public void testSolidAnalysis() {
+        State solidMatter = stateFactory.getState("S");
         trans_list.add("Di");
-        MatterStateSimulator.SolidAnalysis(trans_list, states_array);
+        solidMatter.analyse(trans_list, states_array);
         assertEquals(1, states_array[1]);
 
         trans_list.add("Pr");
-        MatterStateSimulator.SolidAnalysis(trans_list, states_array);
+        solidMatter.analyse(trans_list, states_array);
         assertEquals(1, states_array[0]);
     }
 
     @Test
     public void testLiquidAnalysis() {
-        MatterStateSimulator.LiquidAnalysis(trans_list, states_array);
+        State liquidMatter = stateFactory.getState("L");
+        liquidMatter.analyse(trans_list, states_array);
         assertEquals(1, states_array[4]);
 
         trans_list.add("Di");
-        MatterStateSimulator.LiquidAnalysis(trans_list, states_array);
+        liquidMatter.analyse(trans_list, states_array);
         assertEquals(1, states_array[2]);
     }
 
     @Test
     public void testPlasmaAnalysis() {
+        State plasmaMatter = stateFactory.getState("P");
         trans_list.add("Pr");
-        MatterStateSimulator.PlasmaAnalysis(trans_list, states_array);
+        plasmaMatter.analyse(trans_list, states_array);
         assertEquals(1, states_array[1]);
     }
 
@@ -72,9 +77,10 @@ public class AnalysisTest {
      */
     @Test
     public void testXAnalysis() {
+        State xMatter = stateFactory.getState("X");
         trans_list.add("Ht");
         for (int i=0; i<1000000; i++){
-            MatterStateSimulator.XAnalysis(trans_list, states_array);
+            xMatter.analyse(trans_list, states_array);
         }
         assertEquals(1, states_array[1]);
     }

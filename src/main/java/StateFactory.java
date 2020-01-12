@@ -19,7 +19,6 @@ public class StateFactory {
         } else if(stateString.equalsIgnoreCase("X")){
             return new X();
         }
-
         return null;
     }
 }
