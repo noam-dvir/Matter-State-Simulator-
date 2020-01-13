@@ -58,7 +58,5 @@ public class MatterStateSimulator {
     public static void setRunsCounter(int runsCounter) {
         MatterStateSimulator.runsCounter = runsCounter;
     }
-
-
-
+    
 }
