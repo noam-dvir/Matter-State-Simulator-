@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class AnalysisTest {
     private static ArrayList<String> trans_list;
-    private static int[] states_array;
+    private static int[] states_array = new int[]{0, 0, 0, 0, 0};
     private static StateFactory stateFactory;
 
     @BeforeClass
@@ -20,7 +20,6 @@ public class AnalysisTest {
     @Before
     public void beforeEachTest() {
         //re-initialization
-        states_array= new int[]{0, 0, 0, 0, 0};
         trans_list.clear();
     }
 
