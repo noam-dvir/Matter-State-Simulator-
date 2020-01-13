@@ -19,6 +19,7 @@ public class MatterStateSimulator {
      *         E.g. “G:0,S:2,L:0,P:0,X:1”
      */
     static void RunSimulation(String states, String transitions) {
+        //ToDo: add validation and "man" method
         List<String> transList = Arrays.asList(transitions.split(","));
         State[] inputStates = getInputStates(states);
         int[] resStates = new int[5]; //[G,S,L,P,X] - # of objects
@@ -34,11 +35,12 @@ public class MatterStateSimulator {
 
 
     private static String getResultString(int[] resStates) {
-        return "G:"+String.valueOf(resStates[0])
-             +",S:"+String.valueOf(resStates[1])
-             +",L:"+String.valueOf(resStates[2])
-             +",P:"+String.valueOf(resStates[3])
-             +",X:"+String.valueOf(resStates[4]);
+        //ToDo: try not to use static numbers as the logic might change in the future
+        return "G:"+resStates[0]
+             +",S:"+resStates[1]
+             +",L:"+resStates[2]
+             +",P:"+resStates[3]
+             +",X:"+resStates[4];
     }
 
     private static State[] getInputStates(String states) {
