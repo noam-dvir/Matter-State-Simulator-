@@ -10,6 +10,7 @@ public class MatterStateSimulator {
     }
 
 //ADD COMMENT TO REMOVE LATER
+    //$$$$$$$$$$$$$##############
     /**
      *
      * @param states - List of objects' state status codes, separated by a comma. e.g. “L,G,G”
