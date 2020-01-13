@@ -9,7 +9,7 @@ public class MatterStateSimulator {
         RunSimulation(args[0], args[1]);
     }
 
-
+//ADD COMMENT TO REMOVE LATER
     /**
      *
      * @param states - List of objects' state status codes, separated by a comma. e.g. “L,G,G”
@@ -58,5 +58,5 @@ public class MatterStateSimulator {
     public static void setRunsCounter(int runsCounter) {
         MatterStateSimulator.runsCounter = runsCounter;
     }
-    
+
 }
