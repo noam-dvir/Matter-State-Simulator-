@@ -73,7 +73,7 @@ public class AnalysisTest {
      *      "One time in a million the planet’s God shows his alien power and
      *       turns X matter into Solid, which is impossible for humankind."
      * by running 1000000 simulations with X matter and Heat transition.
-     * The test pass if the X turned into solid exactly once in all those runs and fails otherwise.
+     * The test passes if the X turned into solid exactly once in all those runs and fails otherwise.
      */
     @Test
     public void testXAnalysis() {
